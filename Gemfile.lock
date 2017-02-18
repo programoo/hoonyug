@@ -75,6 +75,9 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     monetize (0.1.4)
+    money (5.0.0)
+      i18n (~> 0.4)
+      json
     multi_json (1.12.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -162,6 +165,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   monetize
+  money
   nokogiri
   pry-byebug
   pry-rails
