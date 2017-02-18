@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218103829) do
+ActiveRecord::Schema.define(version: 20170218152630) do
 
   create_table "markets", force: :cascade do |t|
     t.string   "name"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20170218103829) do
     t.datetime "updated_at",  null: false
     t.integer  "market_id"
     t.string   "market_area"
+    t.string   "symbol"
   end
 
   add_index "stocks", ["market_id"], name: "index_stocks_on_market_id"
