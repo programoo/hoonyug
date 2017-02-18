@@ -22,6 +22,10 @@ namespace :update_data do
       object_list
     end
 
+
+
+    StockDatum.destroy_all
+
     stock_name = 'A'
     doc = Nokogiri::HTML(open("http://www.set.or.th/set/companyhighlight.do?symbol=#{stock_name}&ssoPageId=5&language=en&country=US"))
 
@@ -99,7 +103,29 @@ namespace :update_data do
       end
     end
 
+    # put data into db
+    statistic_list.each_with_index do |data, index|
+      p "#{data} and #{index}"
+      params = {date: data,
+                assets: assets_list[index],
+                liabilities: liabilities_list[index],
+                equity: equity_list[index],
+                paid_up_capital: paid_up_capital_list[index],
+                revenue: revenue_list[index],
+                net_profit: net_profit_list[index],
+                net_profit_margin: net_profit_margin_list[index],
+                eps: eps_list[index],
+                roa: roa_list[index],
+                roe: roe_list[index],
+                last_price: last_price_list[index],
+                market_cap: market_cap_list[index],
+                pe: pe_list[index],
+                pbv: pbv_list[index],
+                book_value: book_per_share_list[index],
+                dividend_yield: dvd_yield_list[index]
+      }
 
-
+      StockDatum.create!(params)
+    end
   end
 end
