@@ -1,4 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
 thai_market = Market.create!({name: 'Thailand'})
 p thai_market
 a_stock = Stock.create!(name: 'A',
