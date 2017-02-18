@@ -26,6 +26,7 @@ namespace :refresh do
     Stock.destroy_all
 
     ('a'..'b').to_a.each do |prefix|
+      print "#{prefix} "
       doc = Nokogiri::HTML(open("http://www.set.or.th/set/commonslookup.do?language=en&country=US&prefix=#{prefix}"))
       doc.children[1].css('table tr').drop(2).each do |link|
         symbol = link.children[1].children.text
@@ -45,6 +46,7 @@ namespace :refresh do
   task stock_data: :environment do
     StockDatum.destroy_all
     Stock.all.each do |stock|
+      print "#{stock.symbol} "
 
       doc = Nokogiri::HTML(open("http://www.set.or.th/set/companyhighlight.do?symbol=#{stock.symbol}&ssoPageId=5&language=en&country=US"))
 
