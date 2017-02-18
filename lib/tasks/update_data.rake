@@ -22,10 +22,11 @@ namespace :refresh do
 
   desc "Dowload and update stock data"
   task stocks: :environment do
+    Market.destroy_all
     market = Market.create!({name: 'Stock exchange of Thailand'})
     Stock.destroy_all
 
-    ('a'..'b').to_a.each do |prefix|
+    ('a'..'z').to_a.each do |prefix|
       print "#{prefix} "
       doc = Nokogiri::HTML(open("http://www.set.or.th/set/commonslookup.do?language=en&country=US&prefix=#{prefix}"))
       doc.children[1].css('table tr').drop(2).each do |link|
@@ -45,6 +46,7 @@ namespace :refresh do
 
   task stock_data: :environment do
     StockDatum.destroy_all
+
     Stock.all.each do |stock|
       print "#{stock.symbol} "
 
