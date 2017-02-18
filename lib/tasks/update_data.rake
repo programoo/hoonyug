@@ -1,29 +1,32 @@
-namespace :update_data do
-  desc "Dowload and update stock data"
-  task thai: :environment do
-    require 'nokogiri'
-    require 'open-uri'
+require 'nokogiri'
+require 'open-uri'
 
-    def collect_objects children, type='unknown'
-      object_list = []
+namespace :refresh do
+  def collect_objects children, type='unknown'
+    object_list = []
 
-      children.drop(2).each_with_index do |child|
+    children.drop(2).each_with_index do |child|
 
-        if child.text.present?
-          if type == 'date'
-            object_list.push(child.text)
-          else
-            value = Monetize.parse(child.text, 'THB').to_d.to_f
-            object_list.push(value)
-          end
+      if child.text.present?
+        if type == 'date'
+          object_list.push(child.text)
+        else
+          value = Monetize.parse(child.text, 'THB').to_d.to_f
+          object_list.push(value)
         end
       end
-
-      object_list
     end
 
+    object_list
+  end
 
 
+  desc "Dowload and update stock data"
+  task stocks: :environment do
+
+  end
+
+  task stock_data: :environment do
     StockDatum.destroy_all
 
     stock_name = 'A'
