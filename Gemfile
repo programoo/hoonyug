@@ -21,5 +21,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
